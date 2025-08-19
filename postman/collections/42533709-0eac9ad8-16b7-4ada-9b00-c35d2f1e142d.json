@@ -1,0 +1,259 @@
+{
+	"info": {
+		"_postman_id": "42533709-0eac9ad8-16b7-4ada-9b00-c35d2f1e142d",
+		"name": "MyFirstAPICollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET Users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b1e6a5ba-f05e-43ad-aeb3-ba66f4d1118b",
+						"exec": [
+							"pm.execution.setNextRequest(\"Add User\");"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "42533709-01d9f2a4-d4ed-47ea-b008-368c04738621",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users?page=2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add User",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3d011024-d4e5-44db-b0e3-667aec8484fc",
+						"exec": [
+							"pm.environment.set(\"FullName\",pm.variables.replaceIn('{{$randomFullName}}') );\r",
+							"pm.environment.set(\"JobTitles\",pm.variables.replaceIn('{{$randomJobTitle}}') );"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "fae0db75-6686-444a-9007-6b2e03af96fe",
+						"exec": [
+							"var resp = pm.response.json();\r",
+							"pm.environment.set(\"ID\",resp.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "42533709-3ba5801e-31bc-4443-bc6a-fce402082fbf",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "reqres-free-v1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{FullName}}\",\r\n    \"job\": \"{{JobTitle}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"id": "42533709-1b27fcb4-f7ac-45cf-ad1f-8bd4456edbc0",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "reqres-free-v1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Shine\",\r\n    \"job\": \"Automation Test Consultant\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users/{{ID}}",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						"{{ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove User",
+			"id": "42533709-44523c2a-dbad-4b3b-898d-8cd1510d690f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "reqres-free-v1",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://reqres.in/api/users/526",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						"526"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add User Dynamic",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3d011024-d4e5-44db-b0e3-667aec8484fc",
+						"exec": [
+							"pm.environment.set(\"FullName\",pm.variables.replaceIn('{{$randomFullName}}') );\r",
+							"pm.environment.set(\"JobTitle\",pm.variables.replaceIn('{{$randomJobTitle}}') );"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "cc9bb55b-90e9-4ccb-871a-2643f874b5d0",
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 201\", function () {\r",
+							"  pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than or equal to 300ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.lessThanOrEqual(300);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "42533709-8c37eb65-b4b7-4d70-803e-6173a425dc42",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "reqres-free-v1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"name\",\r\n    \"job\": \"job\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
