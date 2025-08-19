@@ -26,9 +26,19 @@
 			},
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "reqres-free-v1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
 				"url": {
-					"raw": "https://reqres.in/api/users?page=2",
+					"raw": "https://reqres.in/api/users?page=3",
 					"protocol": "https",
 					"host": [
 						"reqres",
@@ -41,7 +51,7 @@
 					"query": [
 						{
 							"key": "page",
-							"value": "2"
+							"value": "3"
 						}
 					]
 				}
