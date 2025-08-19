@@ -34,8 +34,8 @@
 					}
 				],
 				"body": {
-					"mode": "urlencoded",
-					"urlencoded": []
+					"mode": "formdata",
+					"formdata": []
 				},
 				"url": {
 					"raw": "https://reqres.in/api/users?page=3",
